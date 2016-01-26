@@ -5,8 +5,10 @@
     android:layout_marginRight="16dp"
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
-    android:showDividers="middle"
-    tools:context=".PersonListActivity" >
+    android:showDividers="middle">
+    <!--tools:context=".PersonListActivity"-->
+    <!--android:baselineAligned="false"-->
+    <!-->-->
 
     <!--
     This layout is a two-pane layout for the Persons
