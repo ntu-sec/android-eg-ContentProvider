@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#e5e5e5"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
     android:divider="@android:color/transparent"
     android:dividerHeight="12dp"
     android:drawSelectorOnTop="true"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
     tools:listitem="@layout/person_listitem" />

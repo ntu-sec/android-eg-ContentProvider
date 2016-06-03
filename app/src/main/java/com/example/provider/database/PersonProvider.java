@@ -1,20 +1,21 @@
-package com.example.providerexample.database;
+package com.example.provider.database;
 
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.pm.PathPermission;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+@SuppressWarnings("ConstantConditions")
 public class PersonProvider extends ContentProvider {
 
     public static final String TAG = "PersonProvider";
 
     // All URIs share these parts
-    public static final String AUTHORITY = "com.example.providerexample.provider";
+    public static final String AUTHORITY = "com.example.provider.provider";
     public static final String SCHEME = "content://";
 
     // URIs
@@ -49,13 +50,22 @@ public class PersonProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
+        PathPermission[] pathPermissions = getPathPermissions();
+        if (pathPermissions != null) {
+            for (PathPermission pathPermission : pathPermissions) {
+                Log.w(TAG, pathPermission.toString() + "\t" + pathPermission.getReadPermission() + "\t" + pathPermission.getWritePermission());
+            }
+        } else {
+            Log.w(TAG, "NULL path perms");
+        }
         return true;
     }
 
     @Override
     public Cursor query(@NonNull Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
-        Cursor result = null;
+        Log.i(TAG, "uri=" + uri);
+        Cursor result;
         if (URI_PERSONS.equals(uri)) {
             result = DatabaseHandler
                     .getInstance(getContext())

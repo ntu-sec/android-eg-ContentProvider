@@ -1,10 +1,11 @@
-package com.example.providerexample;
+package com.example.provider;
 
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.MenuItem;
 
 /**
@@ -17,6 +18,7 @@ import android.view.MenuItem;
  * more than a {@link PersonDetailFragment}.
  */
 public class PersonDetailActivity extends FragmentActivity {
+    public static final String TAG = PersonDetailActivity.class.getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +27,10 @@ public class PersonDetailActivity extends FragmentActivity {
 
         // Show the Up button in the action bar.
         ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        if (actionBar != null) {
+            Log.i(TAG, "actionBar not null");
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity
