@@ -1,9 +1,8 @@
-package com.example.provider;
+package sg.edu.ntu.provider;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -12,18 +11,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.example.provider.database.Person;
-import com.example.provider.database.PersonProvider;
+import sg.edu.ntu.provider.database.Person;
+import sg.edu.ntu.provider.database.PersonProvider;
 
-public class PersonListFragment extends ListFragment {
+public class ListFragment extends android.support.v4.app.ListFragment {
 
     public interface Callbacks {
         void onItemSelected(long l);
     }
 
-    public static final String TAG = PersonListFragment.class.getName();
+    public static final String TAG = ListFragment.class.getName();
 
     private Callbacks dummyCB = new Callbacks() {
         @Override
@@ -37,11 +37,14 @@ public class PersonListFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setListAdapter(new SimpleCursorAdapter(getActivity(),
-                R.layout.person_listitem, null, new String[]{
-                Person.COL_FIRSTNAME, Person.COL_LASTNAME,
-                Person.COL_BIRTH}, new int[]{R.id.cardFirstName,
-                R.id.cardLastName, R.id.cardDescription}, 0));
+        ListAdapter adapter = new SimpleCursorAdapter(
+                getActivity(), // context
+                R.layout.person, // layout
+                null, // cursor
+                new String[]{Person.FIRSTNAME, Person.LASTNAME, Person.BIRTH}, // from
+                new int[]{R.id.cardFirstName, R.id.cardLastName, R.id.cardDescription}, 0);
+
+        setListAdapter(adapter);
 
         // Load the content
         getLoaderManager().initLoader(0, null, new LoaderCallbacks<Cursor>() {

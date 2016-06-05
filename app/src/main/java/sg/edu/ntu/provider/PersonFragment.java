@@ -1,4 +1,4 @@
-package com.example.provider;
+package sg.edu.ntu.provider;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,12 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.provider.database.DatabaseHandler;
-import com.example.provider.database.Person;
+import sg.edu.ntu.provider.database.DatabaseHandler;
+import sg.edu.ntu.provider.database.Person;
 
-public class PersonDetailFragment extends Fragment {
+public class PersonFragment extends Fragment {
 
-    public static final String TAG = PersonDetailFragment.class.getName();
+    public static final String TAG = PersonFragment.class.getSimpleName();
 
     public static final String ARG_ITEM_ID = "item_id";
 
@@ -22,14 +22,13 @@ public class PersonDetailFragment extends Fragment {
     private TextView textLastName;
     private TextView textBirthday;
 
-    public PersonDetailFragment() {
+    public PersonFragment() {
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments().containsKey(ARG_ITEM_ID)) {
-            // Should use the contentprovider here ideally
             person = DatabaseHandler.getInstance(getActivity()).getPerson(getArguments().getLong(ARG_ITEM_ID));
         }
     }
@@ -37,7 +36,7 @@ public class PersonDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_person_detail, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_person_details, container, false);
 
         if (person != null) {
             textFirstName = ((TextView) rootView.findViewById(R.id.textFirstName));
@@ -46,7 +45,7 @@ public class PersonDetailFragment extends Fragment {
             textLastName = ((TextView) rootView.findViewById(R.id.textLastName));
             textLastName.setText(person.getLastName());
 
-            textBirthday = ((TextView) rootView.findViewById(R.id.textBio));
+            textBirthday = ((TextView) rootView.findViewById(R.id.textBirth));
             textBirthday.setText(person.getBirth());
         }
 

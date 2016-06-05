@@ -1,8 +1,7 @@
-package com.example.provider.database;
+package sg.edu.ntu.provider.database;
 
 
 import android.content.ContentProvider;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.pm.PathPermission;
 import android.database.Cursor;
@@ -15,23 +14,22 @@ public class PersonProvider extends ContentProvider {
 
     public static final String TAG = "PersonProvider";
 
-    // All URIs share these parts
-    public static final String AUTHORITY = "com.example.provider.provider";
+    public static final String AUTHORITY = "sg.edu.ntu.provider";
     public static final String SCHEME = "content://";
 
-    // URIs
     // Used for all persons
     public static final String PERSONS = SCHEME + AUTHORITY + "/person";
     public static final Uri URI_PERSONS = Uri.parse(PERSONS);
     // Used for a single person, just add the id to the end
-    public static final String PERSON_BASE = PERSONS + "/";
+    public static final String STR_PERSON_BASE = PERSONS + "/";
 
     public PersonProvider() {
+        Log.i(TAG, "uri_persons=" + URI_PERSONS);
     }
 
     @Override
     public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
-        // Implement this to handle requests to delete one or more rows.
+        // TODO Implement this to handle requests to delete one or more rows.
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -65,17 +63,25 @@ public class PersonProvider extends ContentProvider {
     @Override
     public Cursor query(@NonNull Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
-        Log.i(TAG, "uri=" + uri);
+        Log.i(TAG, "uri=" + uri + " last=" + uri.getLastPathSegment());
         Cursor result;
         if (URI_PERSONS.equals(uri)) {
             result = DatabaseHandler
                     .getInstance(getContext())
                     .getReadableDatabase()
-                    .query(Person.TABLE_NAME, Person.FIELDS, null, null, null,
-                            null, null, null);
+                    .query(
+                            Person.TABLE_NAME, // table
+                            Person.FIELDS, // columns
+                            null, // selection
+                            null,  // selectionArgs
+                            null, // groupBy
+                            null, // having
+                            null, // orderBy
+                            null); // limit
             result.setNotificationUri(getContext().getContentResolver(), URI_PERSONS);
-        } else if (uri.toString().startsWith(PERSON_BASE)) {
+        } else if (uri.toString().startsWith(STR_PERSON_BASE)) {
             final long id = Long.parseLong(uri.getLastPathSegment());
+            Log.i(TAG, "id=" + id);
             result = DatabaseHandler
                     .getInstance(getContext())
                     .getReadableDatabase()

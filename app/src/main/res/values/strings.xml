@@ -3,5 +3,11 @@
 
     <string name="app_name">TestProvider</string>
     <string name="settings_new">New</string>
+    <string name="firstname">FirstName</string>
+    <string name="hint_first_name">Your first name</string>
+    <string name="lastname">LastName</string>
+    <string name="hint_last_name">Your last name</string>
+    <string name="birthday">Birthday</string>
+    <string name="hint_birth">Type anything here</string>
 
 </resources>

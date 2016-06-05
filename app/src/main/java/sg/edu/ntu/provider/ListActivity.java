@@ -1,4 +1,4 @@
-package com.example.provider;
+package sg.edu.ntu.provider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,20 +8,21 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.example.provider.database.DatabaseHandler;
-import com.example.provider.database.Person;
+import sg.edu.ntu.provider.database.Person;
 
-public class MainActivity extends FragmentActivity implements
-        PersonListFragment.Callbacks {
+// https://github.com/spacecowboy/AndroidTutorialContentProvider
+
+public class ListActivity extends FragmentActivity implements
+        ListFragment.Callbacks {
 
     @Override
     public void onItemSelected(long id) {
-        Intent detailIntent = new Intent(this, PersonDetailActivity.class);
-        detailIntent.putExtra(PersonDetailFragment.ARG_ITEM_ID, id);
+        Intent detailIntent = new Intent(this, PersonActivity.class);
+        detailIntent.putExtra(PersonFragment.ARG_ITEM_ID, id);
         startActivity(detailIntent);
     }
 
-    public static final String TAG = MainActivity.class.getSimpleName();
+    public static final String TAG = ListActivity.class.getSimpleName();
 
     @Override
     protected void onResume() {
@@ -36,26 +37,25 @@ public class MainActivity extends FragmentActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person_list);
         Log.i(TAG, "onCreate:" + TAG);
-
-        // TODO: If exposing deep links into your app, handle intents here.
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.list_activity, menu);
+        inflater.inflate(R.menu.menu_person_list, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Log.i(TAG, "onOptionsItemSelected");
         boolean result = false;
         if (R.id.newPerson == item.getItemId()) {
             result = true;
             Person p = new Person();
-            DatabaseHandler.getInstance(this).putPerson(p);
             onItemSelected(p.id);
+//            DatabaseHandler.getInstance(this).putPerson(p);
         }
         return result;
     }

@@ -1,4 +1,4 @@
-package com.example.provider.database;
+package sg.edu.ntu.provider.database;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -7,8 +7,9 @@ public class Person {
 
     public static final String TABLE_NAME = "PersonTable";
     public static final String COL_ID = "_id";
-    public static final String COL_FIRSTNAME = "firstName";
-    public static final String COL_LASTNAME = "lastName";
+    public static final String FIRSTNAME = "firstName";
+    public static final String LASTNAME = "lastName";
+    public static final String BIRTH = "birth";
 
     public Person(String firstName, String lastName, String birth) {
         this.firstName = firstName;
@@ -19,16 +20,15 @@ public class Person {
     public Person() {
     }
 
-    public static final String COL_BIRTH = "birth";
-    public static final String[] FIELDS = {COL_ID, COL_FIRSTNAME, COL_LASTNAME,
-            COL_BIRTH};
+    public static final String[] FIELDS = {COL_ID, FIRSTNAME, LASTNAME,
+            BIRTH};
 
     public static final String CREATE_TABLE =
             "CREATE TABLE " + TABLE_NAME + "("
                     + COL_ID + " INTEGER PRIMARY KEY,"
-                    + COL_FIRSTNAME + " TEXT NOT NULL DEFAULT '',"
-                    + COL_LASTNAME + " TEXT NOT NULL DEFAULT '',"
-                    + COL_BIRTH + " TEXT NOT NULL DEFAULT ''"
+                    + FIRSTNAME + " TEXT NOT NULL DEFAULT '',"
+                    + LASTNAME + " TEXT NOT NULL DEFAULT '',"
+                    + BIRTH + " TEXT NOT NULL DEFAULT ''"
                     + ")";
     public static String TAG = "Person";
     public long id = -1;
@@ -70,10 +70,9 @@ public class Person {
 
     public ContentValues getContent() {
         final ContentValues values = new ContentValues();
-        // Note that ID is NOT included here
-        values.put(COL_FIRSTNAME, firstName);
-        values.put(COL_LASTNAME, lastName);
-        values.put(COL_BIRTH, birth);
+        values.put(FIRSTNAME, firstName);
+        values.put(LASTNAME, lastName);
+        values.put(BIRTH, birth);
         return values;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.provider.database;
+package sg.edu.ntu.provider.database;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -22,7 +22,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     private DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        // Good idea to have the context that doesn't die with the window
         this.context = context.getApplicationContext();
     }
 
@@ -63,7 +62,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 String lastName = itemJSObject.optString("lastName");
                 String birth = itemJSObject.optString("birth");
                 Person person = new Person(firstName, lastName, birth);
-                db.insert(Person.TABLE_NAME, null, person.getContent());
+                db.insert(Person.TABLE_NAME, "STUB", person.getContent());
             } catch (JSONException e) {
                 throw new RuntimeException("cannot get js with i=" + i);
             }
@@ -72,13 +71,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+//        do nothing
     }
 
+
     public synchronized Person getPerson(final long id) {
-        final SQLiteDatabase db = this.getReadableDatabase();
-        final Cursor cursor = db.query(Person.TABLE_NAME, Person.FIELDS,
-                Person.COL_ID + " IS ?", new String[]{String.valueOf(id)},
-                null, null, null, null);
+        final SQLiteDatabase db = getReadableDatabase();
+        final Cursor cursor = db.query(
+                Person.TABLE_NAME, // table
+                Person.FIELDS, // fields
+                Person.COL_ID + " IS ?", // selection
+                new String[]{String.valueOf(id)}, // selectionArgs
+                null, // groupBy
+                null, // having
+                null, // orderBy
+                null); // limit
         if (cursor == null || cursor.isAfterLast()) {
             return null;
         }
@@ -94,20 +101,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public synchronized boolean putPerson(final Person person) {
         boolean success = false;
         int result = 0;
-        final SQLiteDatabase db = this.getWritableDatabase();
+        final SQLiteDatabase db = getWritableDatabase();
 
         if (person.id >= 0) {
-            result += db.update(Person.TABLE_NAME, person.getContent(),
-                    Person.COL_ID + " IS ?",
-                    new String[]{String.valueOf(person.id)});
+            result += db.update(Person.TABLE_NAME, // table
+                    person.getContent(), // values
+                    Person.COL_ID + " IS ?", // where clause
+                    new String[]{String.valueOf(person.id)}); // whereArgs
         }
 
         if (result > 0) {
             success = true;
         } else {
-            // Update failed or wasn't possible, insert instead
-            final long id = db.insert(Person.TABLE_NAME, null, person.getContent());
-
+            final long id = db.insert(
+                    Person.TABLE_NAME,
+                    "STUB",
+                    person.getContent());
             if (id >= 0) {
                 person.id = id;
                 success = true;
