@@ -12,11 +12,12 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 
+@SuppressWarnings("unused")
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "Provider.db";
-    private static DatabaseHandler singleton;
+    private static DatabaseHandler handler;
     private final Context context;
 
     private DatabaseHandler(Context context) {
@@ -44,10 +45,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public static DatabaseHandler getInstance(final Context context) {
-        if (singleton == null) {
-            singleton = new DatabaseHandler(context);
+        if (handler == null) {
+            handler = new DatabaseHandler(context);
         }
-        return singleton;
+        return handler;
     }
 
     @Override
@@ -105,8 +106,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             success = true;
         } else {
             // Update failed or wasn't possible, insert instead
-            final long id = db.insert(Person.TABLE_NAME, null,
-                    person.getContent());
+            final long id = db.insert(Person.TABLE_NAME, null, person.getContent());
 
             if (id >= 0) {
                 person.id = id;

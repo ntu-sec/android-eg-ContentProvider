@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">TestProvider</string>
-    <string name="title_person_detail">Person Detail</string>
-    <string name="person_title">New</string>
+    <string name="settings_new">New</string>
 
 </resources>

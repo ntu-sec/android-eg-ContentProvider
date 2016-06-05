@@ -12,23 +12,24 @@ import android.view.MenuItem;
  * An activity representing a single Person detail screen. This
  * activity is only used on handset devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
- * in a {@link PersonListActivity}.
+ * in a {@link MainActivity}.
  * <p/>
  * This activity is mostly just a 'shell' activity containing nothing
  * more than a {@link PersonDetailFragment}.
  */
 public class PersonDetailActivity extends FragmentActivity {
-    public static final String TAG = PersonDetailActivity.class.getName();
+    public static final String TAG = PersonDetailActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i(TAG, "!!!TAG=" + TAG);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person_detail);
 
-        // Show the Up button in the action bar.
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
-            Log.i(TAG, "actionBar not null");
+            actionBar.setTitle("PersonInfo");
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
@@ -66,7 +67,7 @@ public class PersonDetailActivity extends FragmentActivity {
                 //
                 // http://developer.android.com/design/patterns/navigation.html#up-vs-back
                 //
-                NavUtils.navigateUpTo(this, new Intent(this, PersonListActivity.class));
+                NavUtils.navigateUpTo(this, new Intent(this, MainActivity.class));
                 return true;
         }
         return super.onOptionsItemSelected(item);

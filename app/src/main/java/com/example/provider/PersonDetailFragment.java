@@ -10,48 +10,27 @@ import android.widget.TextView;
 import com.example.provider.database.DatabaseHandler;
 import com.example.provider.database.Person;
 
-/**
- * A fragment representing a single Person detail screen.
- * This fragment is either contained in a {@link PersonListActivity}
- * in two-pane mode (on tablets) or a {@link PersonDetailActivity}
- * on handsets.
- */
 public class PersonDetailFragment extends Fragment {
 
     public static final String TAG = PersonDetailFragment.class.getName();
 
-    /**
-     * The fragment argument representing the item ID that this fragment
-     * represents.
-     */
     public static final String ARG_ITEM_ID = "item_id";
 
-    /**
-     * The person this fragment is presenting.
-     */
-    private Person mItem;
+    private Person person;
 
-    /**
-     * The UI elements showing the details of the Person
-     */
     private TextView textFirstName;
     private TextView textLastName;
-    private TextView textBio;
+    private TextView textBirthday;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public PersonDetailFragment() {
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             // Should use the contentprovider here ideally
-            mItem = DatabaseHandler.getInstance(getActivity()).getPerson(getArguments().getLong(ARG_ITEM_ID));
+            person = DatabaseHandler.getInstance(getActivity()).getPerson(getArguments().getLong(ARG_ITEM_ID));
         }
     }
 
@@ -60,15 +39,15 @@ public class PersonDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_person_detail, container, false);
 
-        if (mItem != null) {
+        if (person != null) {
             textFirstName = ((TextView) rootView.findViewById(R.id.textFirstName));
-            textFirstName.setText(mItem.getFirstName());
+            textFirstName.setText(person.getFirstName());
 
             textLastName = ((TextView) rootView.findViewById(R.id.textLastName));
-            textLastName.setText(mItem.getLastName());
+            textLastName.setText(person.getLastName());
 
-            textBio = ((TextView) rootView.findViewById(R.id.textBio));
-            textBio.setText(mItem.getBirth());
+            textBirthday = ((TextView) rootView.findViewById(R.id.textBio));
+            textBirthday.setText(person.getBirth());
         }
 
         return rootView;
@@ -81,11 +60,11 @@ public class PersonDetailFragment extends Fragment {
     }
 
     private void updatePersonFromUI() {
-        if (mItem != null) {
-            mItem.setFirstName(textFirstName.getText().toString());
-            mItem.setLastName(textLastName.getText().toString());
-            mItem.setBirth(textBio.getText().toString());
-            DatabaseHandler.getInstance(getActivity()).putPerson(mItem);
+        if (person != null) {
+            person.setFirstName(textFirstName.getText().toString());
+            person.setLastName(textLastName.getText().toString());
+            person.setBirth(textBirthday.getText().toString());
+            DatabaseHandler.getInstance(getActivity()).putPerson(person);
         }
     }
 }

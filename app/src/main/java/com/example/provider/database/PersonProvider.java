@@ -2,6 +2,7 @@ package com.example.provider.database;
 
 
 import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.pm.PathPermission;
 import android.database.Cursor;
@@ -53,7 +54,7 @@ public class PersonProvider extends ContentProvider {
         PathPermission[] pathPermissions = getPathPermissions();
         if (pathPermissions != null) {
             for (PathPermission pathPermission : pathPermissions) {
-                Log.w(TAG, pathPermission.toString() + "\t" + pathPermission.getReadPermission() + "\t" + pathPermission.getWritePermission());
+                Log.w(TAG, "perm:" + pathPermission.toString() + "\treadPerm" + pathPermission.getReadPermission() + "\twritePerm" + pathPermission.getWritePermission());
             }
         } else {
             Log.w(TAG, "NULL path perms");

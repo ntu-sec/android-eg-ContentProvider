@@ -5,15 +5,15 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:fontFamily="sans-serif-light"
-            android:text="Firstname"
+            android:text="FirstName"
             android:textColor="#ff707070"
             android:textSize="18sp" />
 
@@ -29,9 +29,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:fontFamily="sans-serif-light"
-            android:text="Lastname"
+            android:text="LastName"
             android:textColor="#ff707070"
             android:textSize="18sp" />
 
@@ -47,7 +47,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:fontFamily="sans-serif-light"
             android:text="Biography"
             android:textColor="#ff707070"
