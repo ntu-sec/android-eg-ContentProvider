@@ -1,4 +1,4 @@
-package sg.edu.ntu.provider.database;
+package sg.edu.ntu.testperm.provider.database;
 
 
 import android.content.ContentProvider;
@@ -14,7 +14,7 @@ public class PersonProvider extends ContentProvider {
 
     public static final String TAG = "PersonProvider";
 
-    public static final String AUTHORITY = "sg.edu.ntu.provider";
+    public static final String AUTHORITY = "sg.edu.ntu.testperm.provider";
     public static final String SCHEME = "content://";
 
     // Used for all persons

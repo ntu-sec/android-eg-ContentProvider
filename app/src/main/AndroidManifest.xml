@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="sg.edu.ntu.provider"
+    package="sg.edu.ntu.testperm"
     android:versionCode="1"
     android:versionName="1.0">
 
     <application
         android:allowBackup="true"
         android:fullBackupContent="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/provider"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <activity android:name=".ListActivity">
+        <activity android:name=".provider.ListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".PersonActivity"
-            android:parentActivityName=".ListActivity">
+            android:name=".provider.PersonActivity"
+            android:parentActivityName=".provider.ListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ListActivity" />
+                android:value=".provider.ListActivity" />
         </activity>
 
         <provider
-            android:name="sg.edu.ntu.provider.database.PersonProvider"
-            android:authorities="sg.edu.ntu.provider"
+            android:name=".provider.database.PersonProvider"
+            android:authorities="sg.edu.ntu.testperm.provider"
             android:enabled="true"
             android:exported="false" />
     </application>

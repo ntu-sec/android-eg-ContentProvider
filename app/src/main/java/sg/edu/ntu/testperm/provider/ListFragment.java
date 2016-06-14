@@ -1,4 +1,4 @@
-package sg.edu.ntu.provider;
+package sg.edu.ntu.testperm.provider;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -14,8 +14,9 @@ import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import sg.edu.ntu.provider.database.Person;
-import sg.edu.ntu.provider.database.PersonProvider;
+import sg.edu.ntu.testperm.R;
+import sg.edu.ntu.testperm.provider.database.Person;
+import sg.edu.ntu.testperm.provider.database.PersonProvider;
 
 public class ListFragment extends android.support.v4.app.ListFragment {
 

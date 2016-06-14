@@ -1,4 +1,4 @@
-package sg.edu.ntu.provider;
+package sg.edu.ntu.testperm.provider;
 
 import android.app.ActionBar;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.MenuItem;
+
+import sg.edu.ntu.testperm.R;
 
 public class PersonActivity extends FragmentActivity {
     public static final String TAG = PersonActivity.class.getSimpleName();

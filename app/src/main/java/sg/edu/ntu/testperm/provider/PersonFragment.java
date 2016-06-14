@@ -1,4 +1,4 @@
-package sg.edu.ntu.provider;
+package sg.edu.ntu.testperm.provider;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,8 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import sg.edu.ntu.provider.database.DatabaseHandler;
-import sg.edu.ntu.provider.database.Person;
+import sg.edu.ntu.testperm.R;
+import sg.edu.ntu.testperm.provider.database.DatabaseHandler;
+import sg.edu.ntu.testperm.provider.database.Person;
 
 public class PersonFragment extends Fragment {
 

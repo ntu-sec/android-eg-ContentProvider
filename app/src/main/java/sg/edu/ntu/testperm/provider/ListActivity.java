@@ -1,4 +1,4 @@
-package sg.edu.ntu.provider;
+package sg.edu.ntu.testperm.provider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import sg.edu.ntu.provider.database.Person;
+import sg.edu.ntu.testperm.BuildConfig;
+import sg.edu.ntu.testperm.R;
+import sg.edu.ntu.testperm.provider.database.Person;
 
 // https://github.com/spacecowboy/AndroidTutorialContentProvider
 

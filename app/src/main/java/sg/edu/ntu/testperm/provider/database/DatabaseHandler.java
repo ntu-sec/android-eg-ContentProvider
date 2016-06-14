@@ -1,4 +1,4 @@
-package sg.edu.ntu.provider.database;
+package sg.edu.ntu.testperm.provider.database;
 
 import android.content.Context;
 import android.database.Cursor;
